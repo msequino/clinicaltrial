@@ -1,0 +1,81 @@
+
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="SummaryC2s1">Esame Obiettivo:</label>
+    <textarea name="SummaryC2s1" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c2s1"/>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-5">Rischio</th>
+        <th class="col-md-5">Annotazione</th>
+        <th class="col-md-2">Elimina</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.data.Risk" ng-class="{danger : vm.data.Patient.finalized && ((item.c1s1 == '' || !item.c1s1) || (item.c1s2 == '' || !item.c1s2))}">
+        <input type="hidden" ng-model="item.id"/>
+        <td>
+          <select ng-disabled="vm.finalized" name="RiskC1s1" class="form-control" ng-model="item.c1s1"
+                ng-options="item as item for item in vm.items['Risk.c1s1'] track by item">
+                <option value=""></option>
+          </select>
+        </td>
+        <td><textarea ng-disabled="vm.finalized" class="form-control" ng-model="item.c1s2"></textarea></td>
+        <td ng-hide="vm.finalized"><span class="mouse-over glyphicon glyphicon-remove" ng-click="vm.deleteFromArray('Risk',$index)"></span></td>
+      </tr>
+    </tbody>
+  </table>
+  <button ng-hide="vm.finalized" type="button" ng-click="vm.data.Risk.push({})" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+</div>
+
+<div clas="row">
+  <hr>
+</div>
+
+<div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC2s2.$error.required }">
+  <label for="SummaryC2s2">Precedenti anestesie:</label>
+  <div class="radio">
+    <label for="SummaryC2s2" class="radio-inline"  ng-repeat="(key,item) in vm.items['Summary.c2s2']">
+      <input type="radio" name="SummaryC2s2" required ng-disabled="vm.finalized" ng-click="vm.cleanSummaryC2s3()" ng-model="vm.data.Summary.c2s2" value="{{item}}"/> {{item}}
+    </label>
+  </div>
+</div>
+
+<div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.data.Summary.c2s2 == 'Si' && (!vm.data.Summary.c2s3a && !vm.data.Summary.c2s3b && !vm.data.Summary.c2s3c)}">
+  <label for="SummaryC2s3a">Tipo anestesia:</label>
+  <div class="checkbox">
+    <label for="SummaryC2s3a" class="checkbox-inline">
+      <input type="checkbox" ng-disabled="vm.data.Summary.c2s2 != 'Si' || vm.finalized" name="SummaryC2s3a" ng-model="vm.data.Summary.c2s3a"> Generale
+    </label>
+    <label for="SummaryC2s3b" class="checkbox-inline">
+      <input type="checkbox" ng-disabled="vm.data.Summary.c2s2 != 'Si' || vm.finalized" name="SummaryC2s3b" ng-model="vm.data.Summary.c2s3b"> Locale
+    </label>
+    <label for="SummaryC2s3c" class="checkbox-inline">
+      <input type="checkbox" ng-disabled="vm.data.Summary.c2s2 != 'Si' || vm.finalized" name="SummaryC2s3c" ng-model="vm.data.Summary.c2s3c"> Locoregionale
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="SummaryC2s4">Problemi anestesia:</label>
+    <textarea name="SummaryC2s4" ng-disabled="vm.data.Summary.c2s2 != 'Si' || vm.finalized" class="form-control" ng-model="vm.data.Summary.c2s4"/>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="SummaryC2s5">Terapie in corso:</label>
+    <textarea name="SummaryC2s5" ng-disabled="vm.data.Summary.c2s2 != 'Si' || vm.finalized" class="form-control" ng-model="vm.data.Summary.c2s5"/>
+  </div>
+</div>
+
+<div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC2s6.$error.required }">
+  <label for="SummaryC2s6">Mallampati:</label>
+  <div class="radio">
+    <label for="SummaryC2s6" class="radio-inline"  ng-repeat="(key,item) in vm.items['Summary.c2s6']">
+      <input type="radio" name="SummaryC2s6" required ng-disabled="vm.finalized" ng-model="vm.data.Summary.c2s6" value="{{item}}"/> {{item}}
+    </label>
+  </div>
+</div>

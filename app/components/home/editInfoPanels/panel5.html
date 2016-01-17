@@ -1,0 +1,61 @@
+<br>
+
+<div class="row">
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s1.$error.required }">
+    <label for="BirthC1s1">Orario estrazione feto:</label>
+    <input type="datetime-local" name="BirthC1s1" required class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s1" min="{{vm.data.Analgesia.c2s1 | date :'yyyy-MM-ddTHH:mm:ss'}}"/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s2a.$error.required }"><a name="ex1"></a>
+    <label for="BirthC1s2a" ng-model="vm.data.Birth.c1s2a" >Apgar 1' alla nascita: {{vm.data.Birth.c1s2a}}</label>
+		<div ui-slider min="0" required class="slider-style" ng-disabled="vm.finalized" max="10" name="BirthC1s2a" ng-model="vm.data.Birth.c1s2a"></div>
+	</div>
+
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s2b.$error.required }"><a name="ex1"></a>
+    <label for="BirthC1s2b" ng-model="vm.data.Birth.c1s2b" >Apgar 5' dalla nascita: {{vm.data.Birth.c1s2b}}</label>
+		<div ui-slider min="0" required class="slider-style" ng-disabled="vm.finalized" max="10" name="BirthC1s2b" ng-model="vm.data.Birth.c1s2b"></div>
+	</div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s3a.$error.required }">
+    <label for="BirthC1s3a">BE arterioso </label>
+    <input type="number" required name="BirthC1s3a" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s3a" min="0"/>
+  </div>
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s3b.$error.required }">
+    <label for="BirthC1s3b">BE venoso </label>
+    <input type="number" required name="BirthC1s3b" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s3b" min="0"/>
+
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s4a.$error.required }">
+    <label for="BirthC1s4a">pH arterioso </label>
+    <input type="number" required name="BirthC1s4a" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s4a" min="0"/>
+  </div>
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s4b.$error.required }">
+    <label for="BirthC1s4b">pH venoso </label>
+    <input type="number" required name="BirthC1s4b" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s4b" min="0"/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s5.$error.required }">
+    <label for="BirthC1s5">Ricovero in TIN </label>
+    <div class="radio">
+      <label for="BirthC1s5{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Birth.c1s5']">
+        <input type="radio" required name="BirthC1s5" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s5" value="{{item}}">{{item}}
+      </label>
+    </div>
+  </div>
+  <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.BirthC1s6.$error.required }">
+    <label for="BirthC1s6">Necessità assistenziale </label>
+    <div class="radio">
+      <label for="BirthC1s6{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Birth.c1s6']">
+        <input type="radio" required name="BirthC1s6" ng-disabled="vm.finalized" ng-model="vm.data.Birth.c1s6" value="{{item}}">{{item}}
+      </label>
+    </div>
+  </div>
+</div>

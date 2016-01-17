@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.goirc.ricercainnovazione.it.goirc",
+    "sha256_cert_fingerprints":
+    ["F7:39:C6:C9:22:35:EB:55:FD:A0:A2:50:95:91:1C:0C:9A:0D:5F:DA:AB:5F:D5:19:29:63:86:C6:C9:2B:6B:31"]
+  }
+}]

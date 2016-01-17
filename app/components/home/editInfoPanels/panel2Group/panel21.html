@@ -1,0 +1,32 @@
+<div class="row">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-4">Data e ora</th>
+        <th class="col-md-2">Ruolo</th>
+        <th class="col-md-4">Nominativo</th>
+        <th class="col-md-2">Elimina</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.data.Team" ng-class="{danger : vm.data.Patient.finalized && ((item.c1s1 == '' || !item.c1s1) || (item.DoctorId == '' || !item.DoctorId))}">
+        <input type="hidden" ng-model="item.id"/>
+        <td><input type="datetime-local" ng-disabled="vm.finalized" class="form-control" ng-model="item.c1s1" min="{{vm.data.Summary.c1s1 | date :'yyyy-MM-ddTHH:mm:ss'}}"/></td>
+        <td>
+          <select name="TeamDoctorId" ng-disabled="vm.finalized" class="form-control" ng-model="item.role"
+            ng-options="item as item.title for item in (vm.items['Roles'] | filter : {id : '!3'}) track by item.id ">
+            <option value=""></option>
+          </select>
+        </td>
+        <td>
+          <select name="TeamDoctorId" class="form-control" ng-disabled="vm.finalized" ng-model="item.DoctorId">
+            <option value=""></option>
+            <option ng-repeat="item in (vm.items['Doctors'] | filter : {RoleId : '1'})" value="{{item.id}}">{{item.name + " " + item.surname}}</option>
+          </select>
+        </td>
+        <td ng-hide="vm.finalized"><span class="mouse-over glyphicon glyphicon-remove" ng-click="vm.deleteFromArray('Team',$index)"></span></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" ng-hide="vm.finalized" ng-click="vm.data.Team.push({})" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+</div>

@@ -1,0 +1,33 @@
+<div class="panel panel-default" ng-repeat="item in vm.studies">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{item.acronym}}</h3>
+  </div>
+  <div class="panel-body">
+    <h3>{{item.title}}</h3><br>
+    {{item.description}}
+    <br/>
+    <br/>
+    <div class="row">
+      <p>Categoria: <u>{{item.categories}}</u></p>
+    </div>
+    <div class="row">
+      <p>Linea di applicazione del farmaco: <u>{{item.line}}</u></p>
+    </div>
+    <div class="row">
+      <p>Farmaco: <u>{{item.drug}}</u></p>
+    </div>
+    <div class="row">
+      <center><p class="text-muted">Criteri necessari per entrare in studio</p></center>
+      <div class="col-md-6">
+        <ul>
+          <li ng-repeat="criterio in (item.inclusions | split:';') track by $index">{{criterio}}</li>
+        <ul>
+      </div>
+      <div class="col-md-6">
+        <ul>
+          <li ng-repeat="criterio in (item.exclusions | split:';') track by $index">{{criterio}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "goirc",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "start": "nodejs ./bin/www"
+  },
+  "dependencies": {
+    "angular": "latest",
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "connect": "latest",
+    "debug": "latest",
+    "email-templates": "^1.1.2",
+    "express": "latest",
+    "express-session": "latest",
+    "https": "latest",
+    "method-override": "latest",
+    "morgan": "latest",
+    "mysql": "^2.9.0",
+    "nodemon": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "sequelize": "latest",
+    "angular-bootstrap-datetimepicker": "latest",
+    "handlebars": "~4.0.4",
+    "chart": "latest",
+    "angular-chart.js": "~0.8.8"
+  }
+}

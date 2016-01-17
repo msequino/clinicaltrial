@@ -1,0 +1,18 @@
+<div id="{{handler}}" class="modal fade" ng-class="{in:vm.showCategoryModal,'show-modal':vm.showCategoryModal}" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Inserisci nuova categoria </h4>
+      </div>
+      <div class="modal-body">
+        <p class="danger">Inserisci il nome della categoria</p>
+        <input type="text" ng-model="vm.added" class="form-control" ng-trim="true"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="vm.loadCategory(vm.added)">Si</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.cleanCategory()">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade in" ng-show="vm.showCategoryModal"></div>

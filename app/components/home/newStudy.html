@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-4 thumbnail">
+    <table class="table table-hover" >
+      <thead><center>Lista studi</center></thead>
+      <tbody ng-show="vm.user.ClinicId">
+        <tr ng-repeat="study in (vm.studies | filter : {GroupId : '!1',ClinicId:vm.user.ClinicId})" id="study{{study._id}}" ng-click="vm.loadStudy(study._id)" class="mouse-over" ng-class="{success:!study.closed , danger:study.closed}">
+          <td>{{study.acronym}}</td>
+        </tr>
+      </tbody>
+      <tbody ng-show="!vm.user.ClinicId">
+        <tr ng-repeat="study in (vm.studies)" id="study{{study._id}}" ng-click="vm.loadStudy(study._id)" class="mouse-over" ng-class="{success:!study.closed , danger:study.closed}">
+          <td>{{study.acronym}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-7 col-md-offset-1 thumbnail" ng-if="vm.user.admin">
+      <form name="vm.form" ng-submit="vm.submitStudy()" role="form" novalidate>
+        <div class="form-group" ng-class="{ 'has-error': vm.form.acronym.$dirty && vm.form.acronym.$error.required }">
+          <label for="acronym">Acronimo</label>
+          <input type="text" name="acronym" class="form-control" ng-model="vm.data.acronym" required />
+          <span ng-show="vm.form.acronym.$dirty && vm.form.acronym.$error.required" class="help-block">Acronimo richiesto</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': vm.form.title.$dirty && vm.form.title.$error.required }">
+          <label for="title">Titolo</label>
+          <textarea name="title" class="form-control" ng-model="vm.data.title" required />
+          <span ng-show="vm.form.title.$dirty && vm.form.title.$error.required" class="help-block">Titolo richiesto</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': vm.form.description.$dirty && vm.form.description.$error.required }">
+          <label for="description">Descrizione</label>
+          <textarea name="description" class="form-control" ng-model="vm.data.description" required />
+          <span ng-show="vm.form.description.$dirty && vm.form.description.$error.required" class="help-block">Descrizione richiesta</span>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="category">Categoria (NB attenzione nel definire la categoria, è quella utilizzata dagli utenti. Inoltre, una volta salvata, non è modificabile)</label><br>
+            <div class="dropdown col-md-5 col-md-offset-4" ng-repeat="cat in (vm.data.categories) | split:'/'">
+              <button type="button" ng-disabled="vm.data._id" class="btn btn-success dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="vm.itemToEdit = $index" class="mouse-over">{{cat}} <span class="caret"></span></button>
+              <br/>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <li ng-repeat="catsByStage in (vm.categories | getStage:'/':$index) track by $index "><a class="mouse-over" ng-click="vm.loadCategory(catsByStage)">{{catsByStage}}</a></li>
+              </ul>
+            </div>
+            <div class="dropdown col-md-5 col-md-offset-4">
+              <button type="button" ng-disabled="vm.data._id" class="btn btn-success" ng-click="vm.itemToEdit = (vm.data.categories | split:'/').length" class="mouse-over" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">  &ltNuova categoria&gt <span class="caret"></span></button>
+              <br/>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <li ng-repeat="catsByStage in (vm.categories | getStage:'/':((vm.data.categories | split:'/').length)) track by $index "><a class="mouse-over" ng-click="vm.loadCategory(catsByStage)">{{catsByStage}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div ng-include="'components/home/modal/newCategory.html'"></div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inclusions">Linea</label>
+            <textarea name="line" placeholder="" class="form-control" ng-model="vm.data.line" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exclusions">Tipo di farmaco</label>
+            <textarea name="drug" placeholder="" class="form-control" ng-model="vm.data.drug" />
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inclusions">Criteri inclusione</label>
+            <textarea name="inclusions" placeholder="Separa ciascun criterio con il simbolo ';'" class="form-control" ng-model="vm.data.inclusions" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exclusions">Criteri esclusione</label>
+            <textarea name="exclusions" placeholder="Separa ciascun criterio con il simbolo ';'" class="form-control" ng-model="vm.data.exclusions" />
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="checkbox" name="closed" ng-model="vm.data.closed" ng-checked="vm.data.closed">
+              <label for="closed">Studio chiuso?</label>
+            </input>
+          </div>
+          <div class="form-actions col-md-6">
+              <button type="submit" ng-disabled="vm.form.$invalid || vm.data == {}" class="btn btn-primary">Registra</button>
+              <a ng-click="vm.cleanForm()" class="btn btn-link">Cancella</a>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="col-md-7">
+    <div class="navbar-header">
+      <a class="navbar-brand navbar-left mouse-over" ng-click="vm.changeView('components/home/homepage.html')"  aria-label="Toggle ngHide">Trial Clinici {{vm.configs.appName ? "di " + vm.configs.appName : "" }}</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+            <a class="mouse-over" ng-if="vm.user.group <= 2" ng-click="vm.changeView('components/home/editUsers.html',1)"><span class="glyphicon glyphicon-magnet"/> Lista utenti</a>
+        </li>
+        <li>
+            <a class="mouse-over" ng-if="vm.user" ng-click="vm.changeView('components/home/showStudies.html',3)"><span class="glyphicon glyphicon-list-alt"/> Lista studi</a>
+        </li>
+        <li>
+          <a class="mouse-over" ng-if="vm.user" ng-click="vm.changeView('components/home/statistics.html')"><span class="glyphicon glyphicon-stats"/> Statistiche</a>
+        </li>
+        <li>
+          <a class="mouse-over" ng-if="vm.user.group == 3" ng-click="vm.changeView('components/home/sendRequest.html',4)"><span class="glyphicon glyphicon-cloud"/> Condivisione</a>
+          <a class="mouse-over" ng-if="vm.user.group == 2" ng-click="vm.changeView('components/home/pageRequest.html',4)"><span class="glyphicon glyphicon-cloud"/> Gestisci richieste</a>
+        </li>
+        <li>
+            <a class="mouse-over" ng-if="vm.user.group <= 2" ng-click="vm.changeView('components/home/newStudy.html',3)"><span class="glyphicon glyphicon-cloud-upload"/> Nuovo studio</a>
+        </li>
+        <li>
+            <a class="mouse-over" ng-if="vm.user.group == 1" ng-click="vm.changeView('components/home/editClinics.html',4)"><span class="glyphicon glyphicon-cloud-upload"/> Gestione cliniche</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div ng-show="vm.user" class="dropdown navbar-dropdown" ng-class="{open:vm.openDropdown}"  ng-mouseover="vm.openDropdown = true" ng-mouseleave="vm.openDropdown = false" >
+    <a class="nav navbar-nav navbar-brand navbar-right mouse-over" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">{{vm.user.email}}
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu test" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a class="mouse-over" ng-click="vm.changeView('components/home/editProfile.html',2)"><span class="glyphicon glyphicon-user"> Visualizza profilo</span></a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a class="mouse-over" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+    </ul>
+  </div>
+  <div ng-hide="vm.user" class="form-inline user-form navbar-right">
+    <input type="email" class="form-control" ng-model="vm.email" placeholder="Email">
+    <input type="password" class="form-control" ng-model="vm.password" placeholder="Password">
+    <button type="button" class="btn btn-default" ng-click="vm.login()">Log in</button>
+  </div>
+</nav>

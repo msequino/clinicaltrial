@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="form-group col-md-12" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s1.$error.required }">
+    <label for="AnestesiaC2s1">E' stata eseguita una epidurale? </label>
+    <div class="radio">
+      <label for="AnestesiaC2s1{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Anestesia.c2s1']">
+          <input type="radio" name="AnestesiaC2s1" ng-required="vm.Anestesia == 'Si'" ng-disabled="vm.finalized" ng-change="vm.cleanAnestesiaC2s1()" ng-model="vm.data.Anestesia.c2s1" value="{{item}}">{{item}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="block" ng-show="vm.data.Anestesia.c2s1 == 'Si'">
+  <div class="row">
+    <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s2.$error.required }">
+      <label for="AnestesiaC2s2">Inizio estensione blocco:</label>
+      <input type="datetime-local" name="AnestesiaC2s2" ng-required="vm.data.Anestesia.c2s1 == 'Si'" ng-disabled="vm.finalized" class="form-control" ng-model="vm.data.Anestesia.c2s2" ng-model-options="{timezone : vm.timezone}"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s3.$error.required }">
+      <label for="AnestesiaC2s3">Anestetico locale </label>
+      <div class="radio">
+        <label for="AnestesiaC2s3{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Anestesia.c2s3']">
+          <input type="radio" name="AnestesiaC2s3" ng-required="vm.data.Anestesia.c2s1 == 'Si'" ng-disabled="vm.finalized" ng-change="vm.cleanAnestesiaC2s3()" ng-model="vm.data.Anestesia.c2s3" value="{{item}}">{{item}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="vm.data.Anestesia.c2s3 == 'Si'">
+    <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s3a.$error.required }">
+      <label for="AnestesiaC2s3a">Farmaco:</label>
+      <select name="AnestesiaC2s3a" class="form-control" ng-required="vm.data.Anestesia.c2s3 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s3a"
+        ng-options="item as item for item in vm.items['Anestesia.c2s3a'] track by item">
+        <option value=""></option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.AnestesiaC2s3c.$dirty && vm.form.AnestesiaC2s3c.$error.min , 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s3c.$error.required}">
+      <label for="AnestesiaC2s3c">Vol. (ml):</label>
+      <input type="number" name="AnestesiaC2s3c" class="form-control" ng-required="vm.data.Anestesia.c2s3 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s3c" min="0"/>
+      <span ng-show="vm.form.AnestesiaC2s3c.$dirty && vm.form.AnestesiaC2s3c.$error.min" class="help-block">Maggiore di 0</span>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.AnestesiaC2s3b.$dirty && vm.form.AnestesiaC2s3b.$error.min, 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s3b.$error.required}">
+      <label for="AnestesiaC2s3b">Conc. (mg/ml):</label>
+      <input type="number" name="AnestesiaC2s3b" class="form-control" ng-required="vm.data.Anestesia.c2s3 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s3b" min="0"/>
+      <span ng-show="vm.form.AnestesiaC2s3b.$dirty && vm.form.AnestesiaC2s3b.$error.min" class="help-block">Maggiore di 0</span>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s4.$error.required }">
+      <label for="AnestesiaC2s4">Anestetico locale </label>
+      <div class="radio">
+        <label for="AnestesiaC2s4{{item}}" class="radio-inline" ng-repeat="(key,item) in vm.items['Anestesia.c2s4']">
+          <input type="radio" name="AnestesiaC2s4" ng-required="vm.data.Anestesia.c2s1 == 'Si'" ng-change="vm.cleanAnestesiaC2s4()" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s4" value="{{item}}">{{item}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="vm.data.Anestesia.c2s4 == 'Si'">
+    <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s4a.$error.required }">
+      <label for="AnestesiaC2s4a">Farmaco:</label>
+      <select name="AnestesiaC2s4a" class="form-control" ng-required="vm.data.Anestesia.c2s4 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s4a"
+        ng-options="item as item for item in vm.items['Anestesia.c2s4a'] track by item">
+        <option value=""></option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.AnestesiaC2s4c.$dirty && vm.form.AnestesiaC2s4c.$error.min ,'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s4c.$error.required }">
+      <label for="AnestesiaC2s4c">Vol. (ml):</label>
+      <input type="number" name="AnestesiaC2s4c" class="form-control" ng-required="vm.data.Anestesia.c2s4 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s4c" min="0"/>
+      <span ng-show="vm.form.AnestesiaC2s4c.$dirty && vm.form.AnestesiaC2s4c.$error.min" class="help-block">Maggiore di 0</span>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.AnestesiaC2s4b.$dirty && vm.form.AnestesiaC2s4b.$error.min ,'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s4b.$error.required}">
+      <label for="AnestesiaC2s4b">Conc. (mg/ml):</label>
+      <input type="number" name="AnestesiaC2s4b" class="form-control" ng-required="vm.data.Anestesia.c2s4 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s4b" min="0"/>
+      <span ng-show="vm.form.AnestesiaC2s4b.$dirty && vm.form.AnestesiaC2s4b.$error.min" class="help-block">Maggiore di 0</span>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s5.$error.required }">
+      <label for="AnestesiaC2s5">Oppioide </label>
+      <div class="radio">
+        <label for="AnestesiaC2s5{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Anestesia.c2s5']">
+          <input type="radio" name="AnestesiaC2s5" ng-required="vm.data.Anestesia.c2s1 == 'Si'" ng-change="vm.cleanAnestesiaC2s5()" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s5" value="{{item}}">{{item}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="vm.data.Anestesia.c2s5 == 'Si'">
+    <div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s5a.$error.required }">
+      <label for="AnestesiaC2s5a">Farmaco:</label>
+      <select name="AnestesiaC2s5a" class="form-control" ng-required="vm.data.Anestesia.c2s5 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s5a"
+        ng-options="item as item for item in vm.items['Anestesia.c2s5a'] track by item">
+        <option value=""></option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.AnestesiaC2s5b.$dirty && vm.form.AnestesiaC2s5b.$error.min ,'has-error-background': vm.data.Patient.finalized && vm.form.AnestesiaC2s5b.$error.required}">
+      <label for="AnestesiaC2s5b">Q.tà (mcg):</label>
+      <input type="number" name="AnestesiaC2s5b" class="form-control" ng-required="vm.data.Anestesia.c2s5 == 'Si'" ng-disabled="vm.finalized" ng-model="vm.data.Anestesia.c2s5b" min="0"/>
+      <span ng-show="vm.form.AnestesiaC2s5b.$dirty && vm.form.AnestesiaC2s5b.$error.min" class="help-block">Maggiore di 0</span>
+    </div>
+  </div>
+
+</div>

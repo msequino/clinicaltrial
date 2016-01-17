@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-5 thumbnail">
+    <table class="table table-hover" >
+      <thead><center>Utenti registrati</center></thead>
+      <tbody ng-show="vm.user.ClinicId">
+        <tr ng-repeat="user in (vm.users | filter : {GroupId : '!1',ClinicId:vm.user.ClinicId})" id="user{{user._id}}" ng-click="vm.loadUser(user.id)" class="mouse-over" ng-class="{success:user.active , danger:!user.active}">
+          <td>{{user.firstName + " " + user.lastName}}</td>
+        </tr>
+      </tbody>
+      <tbody ng-show="!vm.user.ClinicId">
+        <tr ng-repeat="user in (vm.users)" id="user{{user._id}}" ng-click="vm.loadUser(user._id)" class="mouse-over" ng-class="{success:user.active , danger:!user.active}">
+          <td>{{user.firstName + " " + user.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-5 col-md-offset-1 thumbnail">
+      <form name="vm.form" ng-submit="vm.submitUser()" role="form" novalidate>
+        <input type="hidden" ng-model="vm.data._id"/>
+        <div class="row">
+          <div class="form-group col-md-6" ng-class="{ 'has-error': vm.form.firstName.$dirty && vm.form.firstName.$error.required }">
+              <label for="username">Nome</label>
+              <input type="text" name="firstName" class="form-control" ng-model="vm.data.firstName" required />
+              <span ng-show="vm.form.firstName.$dirty && vm.form.firstName.$error.required" class="help-block">Nome richiesto</span>
+          </div>
+          <div class="form-group col-md-6" ng-class="{ 'has-error': vm.form.lastName.$dirty && vm.form.lastName.$error.required }">
+              <label for="username">Cognome</label>
+              <input type="text" name="lastName" class="form-control" ng-model="vm.data.lastName" required />
+              <span ng-show="vm.form.lastName.$dirty && vm.form.lastName.$error.required" class="help-block">Cognome richiesto</span>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefono</label>
+            <input type="text" name="phone" class="form-control" ng-model="vm.data.phone" />
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': vm.form.email.$dirty && (vm.form.email.$error.required || vm.form.email.$error.email) }">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" ng-model="vm.data.email" required />
+            <span ng-show="vm.form.email.$dirty && vm.form.email.$error.required" class="help-block">Username richiesto</span>
+            <span ng-show="vm.form.email.$dirty && vm.form.email.$error.email" class="help-block">Username corrisponde ad email</span>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6" ng-class="{ 'has-error': vm.form.group.$dirty && vm.form.group.$error.required }">
+            <label for="groupId">Tipo profilo</label>
+            <select class="form-control" name="group" ng-model="vm.data.group" ng-options="item for item in vm.configs['userProfile']" required/>
+            <span ng-show="vm.form.group.$dirty && vm.form.group.$error.required" class="help-block">Tipo profilo richiesto</span>
+          </div>
+          <div ng-if="vm.user.admin" class="form-group col-md-6" ng-class="{ 'has-error': vm.form.clinic.$dirty && vm.form.clinic.$error.required }">
+            <label for="groupId">Clinica</label>
+            <select class="form-control" name="clinic" ng-model="vm.data.clinic" ng-options="item as item.name for item in vm.configs['clinics'] track by item._id" required/>
+            <span ng-show="vm.form.clinic.$dirty && vm.form.clinic.$error.required" class="help-block">Clinica richiesta</span>
+          </div>
+        </div>
+
+        <div class="row" ng-show="vm.data._id">
+          <div class="form-group col-md-6">
+            <a class="mouse-over" ng-click="vm.showModal = !vm.showModal">Resetta password utente</a>
+            <div ng-include="'components/home/modal/resetPassword.html'"></div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <input type="checkbox" name="active" ng-model="vm.data.active" ng-checked="vm.data.active">
+              <label for="active">Utente attivo?</label>
+            </input>
+          </div>
+          <div class="form-actions col-md-6">
+              <button type="submit" ng-disabled="vm.form.$invalid || vm.data == {}" class="btn btn-primary">{{vm.data.id ? "Aggiorna" : "Registra"}}</button>
+              <a ng-click="vm.cleanForm()" class="btn btn-link">Cancella</a>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>

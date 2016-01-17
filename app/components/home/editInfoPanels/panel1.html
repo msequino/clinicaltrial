@@ -1,0 +1,38 @@
+<br>
+<input type="hidden" ng-model="vm.data.Summary.PatientId"/>
+
+<div class="panel panel-info">
+
+  <div class="panel-heading">Anagrafica</div>
+  <div class="panel-body" ng-include="'components/home/editInfoPanels/panel1Group/panel11.html'"></div>
+</div>
+
+<div class="panel panel-info">
+
+  <div class="panel-heading">Valutazione del rischio anestesiologico</div>
+  <div class="panel-body" ng-include="'components/home/editInfoPanels/panel1Group/panel12.html'"></div>
+</div>
+
+<div class="panel panel-info">
+
+  <div class="panel-heading">Consulenze</div>
+  <div class="panel-body" ng-include="'components/home/editInfoPanels/panel1Group/panel13.html'"></div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC3s1.$error.required }">
+    <label for="SummaryC3s1">Classe ASA Ostetrica:</label>
+    <div class="radio">
+      <label for="SummaryC3s1{{item}}" class="radio-inline"  ng-repeat="(key,item) in vm.items['Summary.c3s1']">
+        <input type="radio" name="SummaryC3s1" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c3s1" value="{{item}}" required>{{item}}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group col-md-6" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryDoctorId.$error.required }">
+    <label for="SummaryDoctorId">Medico:</label>
+    <select name="SummaryDoctorId" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Summary.DoctorId" required>
+      <option ng-repeat="item in (vm.items['Doctors'] | filter : {RoleId : '1'})" value="{{item.id}}" >{{item.name + " " + item.surname}}</option>
+    </select>
+  </div>
+</div>

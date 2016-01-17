@@ -1,0 +1,46 @@
+<div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s1.$error.required }">
+  <label for="SummaryC1s1">Data visita (*):</label>
+  <div class="input-group">
+      <p class="showInline"><input type="text" name="SummaryC1s1" disabled finalized="vm.finalized" class="form-control" max-date="vm.today" ng-model="vm.data.Summary.c1s1" datepicker required/></p>
+  </div>
+  <span ng-show="vm.form.SummaryC1s1.$dirty && vm.form.SummaryC1s1.$error.required" class="help-block">Data richiesta</span>
+</div>
+
+<div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s2.$error.required }">
+  <label for="SummaryC1s2">Visita in regime:</label>
+  <div class="radio">
+    <label for="SummaryC1s2{{item}}" class="radio-inline" ng-repeat="(key,item) in vm.items['Summary.c1s2']">
+      <input type="radio" name="SummaryC1s2" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c1s2" value="{{item}}" required>{{item}}
+    </label>
+  </div>
+</div>
+
+<div class="form-group col-md-4" ng-class="{ 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s3.$error.required }">
+  <label for="SummaryC1s3">Data presunto parto (*):</label>
+  <div class="input-group">
+      <p class="showInline"><input type="text" name="SummaryC1s3" disabled finalized="vm.finalized" class="form-control" min-date="vm.data.Summary.c1s1" ng-model="vm.data.Summary.c1s3" datepicker required/></p>
+  </div>
+  <span ng-show="vm.form.SummaryC1s3.$dirty && vm.form.SummaryC1s3.$error.required" class="help-block">Data richiesta</span>
+</div>
+
+<div class="col-md-12">
+  <hr>
+</div>
+
+<div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.SummaryC1s4.$dirty && vm.form.SummaryC1s4.$error.min , 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s4.$error.required }">
+  <label for="SummaryC1s5">Parità:</label>
+  <input type="number" name="SummaryC1s4" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c1s4" min="0" required/>
+  <span ng-show="vm.form.SummaryC1s4.$dirty && vm.form.SummaryC1s4.$error.min" class="help-block">Maggiore di 0</span>
+</div>
+
+<div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.SummaryC1s5.$dirty && vm.form.SummaryC1s5.$error.min , 'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s5.$error.required }">
+  <label for="SummaryC1s5">Peso (kg):</label>
+  <input type="number" name="SummaryC1s5" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c1s5" min="0" required/>
+  <span ng-show="vm.form.SummaryC1s5.$dirty && vm.form.SummaryC1s5.$error.min" class="help-block">Maggiore di 0</span>
+</div>
+
+<div class="form-group col-md-4" ng-class="{ 'has-error': vm.form.SummaryC1s6.$dirty && vm.form.SummaryC1s6.$error.min ,'has-error-background': vm.data.Patient.finalized && vm.form.SummaryC1s6.$error.required}">
+  <label for="SummaryC1s6">Altezza (cm):</label>
+  <input type="number" name="SummaryC1s6" class="form-control" ng-disabled="vm.finalized" ng-model="vm.data.Summary.c1s6" min="0" required/>
+  <span ng-show="vm.form.SummaryC1s6.$dirty && vm.form.SummaryC1s6.$error.min" class="help-block">Maggiore di 0</span>
+</div>
