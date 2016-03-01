@@ -88,7 +88,7 @@ gulp.task('default', function (callback) {
     'changelog',
     'commit-changes',
     'push-changes',
-//    'create-new-tag',
+    'create-new-tag',
     'github-release',
     function (error) {
       if (error) {
