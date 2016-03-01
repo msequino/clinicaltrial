@@ -17,39 +17,6 @@ gulp.task('test', function () {
 		.pipe(mocha({reporter: 'nyan'}));
 });
 
-gulp.task('compress-controllers', function() {
-  return gulp.src(['public/app/controllers/*.js'])
-    .pipe(rename({ extname: '.min.js' }))
-    .pipe(uglify())
-    .pipe(uglify().on('error', gutil.log)) // notice the error event here
-    .pipe(gulp.dest('./dist/app/controllers/'));
-});
-
-gulp.task('compress-javascripts', function() {
-  return gulp.src(['public/javascripts/datepicker_anagrafe.js','public/javascripts/index.js',
-    'public/javascripts/liboptions.js','public/javascripts/new-ce_dates.js','public/javascripts/nuovo*.js',
-    'public/javascripts/progetti_aperti.js','public/javascripts/pubbs.js','public/javascripts/ricerche*.js',
-    'public/javascripts/stats.js','public/javascripts/time*.js','public/javascripts/toWords.js',
-    'public/javascripts/upload_doc.js','public/javascripts/vin-hiderules.js','public/javascripts/visualizza_progetti.js'])
-    .pipe(rename({ extname: '.min.js' }))
-    .pipe(uglify())
-    .pipe(uglify().on('error', gutil.log)) // notice the error event here
-    .pipe(gulp.dest('./dist/javascripts/'));
-});
-gulp.task('export-files-not-valid', function() {
-  return gulp.src(['public/javascripts/afferences.js','public/javascripts/finalizza.js'])
-    .pipe(gulp.dest('./dist/javascripts/'));
-});
-
-
-gulp.task('compress-css', function () {
-  gulp.src('./public/stylesheets/*.css')
-    .pipe(uglifycss({
-      "uglyComments": true
-    }))
-    .pipe(gulp.dest('./dist/stylesheets/'));
-});
-
 gulp.task('changelog', function () {
   return gulp.src('CHANGELOG.md', {
     buffer: false
@@ -117,10 +84,6 @@ gulp.task('create-new-tag', function (cb) {
 gulp.task('default', function (callback) {
   runSequence(
     //'test',
-    'compress-controllers',
-    'compress-javascripts',
-		'export-files-not-valid',
-		'compress-css',
     'bump-version',
     'changelog',
     'commit-changes',
