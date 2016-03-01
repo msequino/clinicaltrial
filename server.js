@@ -13,7 +13,7 @@ var express =	 	require('express')
   , passport = 		require('passport');
 
 var app = express();
-
+prova
 //app.use(favicon(__dirname + '/app/favicon.unipr.ico'));
 app.use(logger('dev'));
 
