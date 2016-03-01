@@ -62,9 +62,10 @@ module.exports.save = function(req,res,next){
     if(!err){
       log.log('info','UPDATE USER '+ newUser.email + ' SUCCESS');
       res.json({code : 200});
-    }else
+    }else{
       log.log('error','UPDATE USER '+ newUser.email + ' error mongo type ' + err.code);
       res.status(400).json({code : 400,message : "User already exists"});
+    }
   });
 }
 

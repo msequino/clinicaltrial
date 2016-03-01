@@ -44,10 +44,9 @@
           <div class="form-group col-md-6" ng-class="{ 'has-error': vm.form.group.$dirty && vm.form.group.$error.required }">
             <label for="groupId">Tipo profilo</label>
 <!--            <select class="form-control" name="group" ng-model="vm.data.group" ng-options="item for item in vm.configs['userProfile']" required/>-->
-            <select class="form-control" name="group" ng-options="item.label for item in vm.configs['userProfile'] track by item.id" ng-model="vm.data.group" required></select>
+            <select class="form-control" name="group" ng-options="item.id as item.label for item in vm.configs['userProfile']" ng-model="vm.data.group" required></select>
             <span ng-show="vm.form.group.$dirty && vm.form.group.$error.required" class="help-block">Tipo profilo richiesto</span>
           </div>
-<p>{{vm.data.group}}</p>
 
 <!--          <div ng-if="vm.user.group == 1" class="form-group col-md-6" ng-class="{ 'has-error': vm.form.clinic.$dirty && vm.form.clinic.$error.required }">
             <label for="groupId">Clinica</label>
@@ -86,3 +85,7 @@
       </form>
   </div>
 </div>
+<!--
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+async defer></script>
+-->

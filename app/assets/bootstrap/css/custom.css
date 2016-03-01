@@ -231,3 +231,19 @@ span.error{
 .user-form{
   margin: 5px;
 }
+
+table tbody, table thead
+{
+    display: block;
+}
+
+table tbody
+{
+   overflow: auto;
+   height: 650px;
+}
+
+table.table > tbody > tr > td
+{
+   width: 10%;
+}
