@@ -93,7 +93,7 @@ gulp.task('commit-changes', function () {
 gulp.task('push-changes', function (cb) {
 
 	if(process.argv.length == 3)	if(process.argv[2].indexOf("--nogit") > -1)	return;
-	git.push('clinicaltrial', 'master', cb);
+	git.push('origin', 'master', cb);
 });
 
 gulp.task('create-new-tag', function (cb) {
