@@ -24,10 +24,9 @@ var user = Schema({
   image : {
     type : String,
   },
-
   group : {
-    type : String,
-    enum : ["Admin", "User","Responsabile"]
+    type : Number,
+    //enum : [{id: 1,  label: 'Admin'}, {id: 2,  label: 'Responsabile' }, {id: 3,  label: 'User' }]
   },
   clinic : String,
   active : Boolean,
@@ -42,15 +41,15 @@ user.methods.read_info = function read_info(){
   return {
     id	: this.id,
     email : this.email,
-    group : (this.group.indexOf("Admin") >= 0 ? 1 : (this.group.indexOf("Responsabile") >= 0 ? 2 : this.group.indexOf("User") >= 0 ? 3 : null)),
+    group : (this.group ? this.group : null),
     clinic : this.clinic
   };
 };
 user.methods.isAdmin = function(){
-  return this.group.indexOf("Admin") >= 0;
+  return this.group == 1;
 }
 user.methods.isResponsible = function(){
-  return this.group.indexOf("Admin") >= 0 || this.group.indexOf("Responsabile") >= 0;
+  return this.group == 1 || this.group == 2;
 }
 user.methods.isActive = function(){
   return this.active;

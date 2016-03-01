@@ -14,7 +14,7 @@
         return service;
 
         function Get(item) {
-            return $http.get('/goirc/'+item).then(handleSuccess, handleError('Error getting all '+ item));
+            return $http.get('/clinicaltrial/'+item).then(handleSuccess, handleError('Error getting all '+ item));
         }
 
         // private functions

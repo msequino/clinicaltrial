@@ -20,18 +20,18 @@ module.exports = function(app) {
   // Deny only USER
   var isTopUser = function(req, res, next){
     if (!req.isAuthenticated())
-      return res.json({code : 401});
+      return res.json({code : 401,message : "User not authorized"})
     if (!req.user.isResponsible() )
-      return res.json({code : 401});
+      return res.json({code : 401,message : "User not authorized"})
     next();
   };
 
   // Deny only USER
   var isAdmin = function(req, res, next){
     if (!req.isAuthenticated())
-      return res.json({code : 401});
+      return res.json({code : 401,message : "User not authorized"})
     if (!req.user.isAdmin() )
-      return res.json({code : 401});
+      return res.json({code : 401,message : "User not authorized"})
     next();
   };
 
@@ -43,12 +43,13 @@ module.exports = function(app) {
 
   app.get('/auth/session', isAuthenticated, Auth.getSession);
   app.post('/auth/login', passport.authenticate('local-login'), Auth.login);
+  app.post('/auth/signup', Auth.login);
   app.post('/auth/logout', isAuthenticated, Auth.logout);
 
   app.get('/user',isTopUser,User.getAll);
   app.get('/user/:id',isAuthenticated,User.get);
   app.post('/user/resetPassword/:id',isTopUser,User.resetPassword);
-  app.post('/user',isTopUser,User.create);
+  app.post('/user',User.create);
   app.put('/user/:id',isAuthenticated,User.save);
 
   app.get('/category',isAuthenticated, Category.getCategories);
@@ -61,9 +62,10 @@ module.exports = function(app) {
   app.put('/study/:id',isTopUser,Study.saveProject);
   app.delete('/study/:id',isTopUser,Study.closeProject);
 
-  app.get('/clinic',isAuthenticated,Clinic.getAll);
-  app.get('/clinic/:id',isAdmin,Clinic.get);
-  app.post('/clinic',isAdmin,Clinic.create);
-  app.put('/clinic/:id',isAdmin,Clinic.save);
+  app.get('/clinic/find',Clinic.getByName);
+  app.get('/clinic',isAuthenticated,Clinic.getAll)
+    .get('/clinic/:id',isAdmin,Clinic.get)
+    .post('/clinic',isAdmin,Clinic.create)
+    .put('/clinic/:id',isAdmin,Clinic.save);
 
 }

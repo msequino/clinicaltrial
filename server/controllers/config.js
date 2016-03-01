@@ -4,7 +4,7 @@ var db = require('../config/db').models,
 module.exports.getConfig = function(req,res){
   var data = {};
 
-  data['userProfile'] = db.User.schema.path("group").enumValues;
+  data['userProfile'] = [{id: 1,  label: 'Admin'}, {id: 2,  label: 'Responsabile' }, {id: 3,  label: 'User' }];
   db.Clinic.findById(req.user.clinic,function(err,name){
     data['appName'] = (name ? name['name'] : null);
     db.Clinic.find({},function(err,name){

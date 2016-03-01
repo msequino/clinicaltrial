@@ -11,6 +11,15 @@ module.exports.getAll = function(req,res){
   });
 }
 
+module.exports.getByName = function(req,res){
+  db.Clinic.find({$or : [{name : { "$regex": req.query.s, "$options": "i" }}, {city : { "$regex": req.query.s, "$options": "i" }}]},'name city',function(err,clinics){
+    if(err)
+      res.json({error : 500,message : "Something wrong"});
+
+    res.json({code : 200,data : clinics});
+  });
+}
+
 module.exports.get = function(req,res){
   db.Clinic.findById(req.params.id,function(err,data){
     if(err)

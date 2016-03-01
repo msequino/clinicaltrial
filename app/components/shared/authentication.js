@@ -22,7 +22,7 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('/goirc/auth/login', { email: username, password: password })
+            $http.post('/clinicaltrial/auth/login', { email: username, password: password })
                 .success(function (response) {
                     callback(response);
                 })
@@ -34,7 +34,7 @@
 
         function Logout(callback) {
 
-          $http.post('/goirc/auth/logout')
+          $http.post('/clinicaltrial/auth/logout')
               .success(function (response) {
                   callback(response);
               });
@@ -43,7 +43,7 @@
 
         function GetSession(callback) {
 
-          $http.get('/goirc/auth/session')
+          $http.get('/clinicaltrial/auth/session')
               .success(function (response) {
                 callback(response);
               }).error(function (error){

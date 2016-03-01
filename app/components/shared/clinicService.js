@@ -18,23 +18,23 @@
         return service;
 
         function GetAll() {
-            return $http.get('/goirc/clinic').then(handleSuccess, handleError('Error getting all clinics'));
+            return $http.get('/clinicaltrial/clinic').then(handleSuccess, handleError('Error getting all clinics'));
         }
 
         function GetById(id) {
-            return $http.get('/goirc/clinic/' + id).then(handleSuccess, handleError('Error getting clinic by id'));
+            return $http.get('/clinicaltrial/clinic/' + id).then(handleSuccess, handleError('Error getting clinic by id'));
         }
 
         function Create(clinic) {
-            return $http.post('/goirc/clinic', clinic).then(handleSuccess, handleError);
+            return $http.post('/clinicaltrial/clinic', clinic).then(handleSuccess, handleError);
         }
 
         function Update(clinic) {
-            return $http.put('/goirc/clinic/' + clinic._id, clinic).then(handleSuccess, handleError);
+            return $http.put('/clinicaltrial/clinic/' + clinic._id, clinic).then(handleSuccess, handleError);
         }
 
         function Delete(id) {
-            return $http.delete('/goirc/clinic/' + id).then(handleSuccess, handleError('Error deleting clinic'));
+            return $http.delete('/clinicaltrial/clinic/' + id).then(handleSuccess, handleError('Error deleting clinic'));
         }
 
         // private functions

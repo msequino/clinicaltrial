@@ -2,12 +2,26 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var clinic = Schema({
+  code : {
+    type : String
+  },
   name : {
     type : String,
     required : true
   },
   address : {
     type : String
+  },
+  cap : {
+    type : Number
+  },
+  coords : {
+    latitude: {
+      type: Number,
+    },
+    longitude: {
+      type: Number,
+    }
   },
   city : {
     type : String

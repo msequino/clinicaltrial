@@ -215,13 +215,15 @@
         function submitUser(changePage){
 
           if(!vm.data._id){
-            if(vm.user)
-              vm.data.clinic = vm.user.clinic;
 
+            vm.data.clinic = vm.clinicsObject.originalObject._id;
             vm.data.active = (vm.data.active ? true : false);
+            vm.data.group = 3;
             UserService.Create(vm.data).then(function(response){
+              vm.error = response.code == 400;
+              vm.success = response.code != 400;
+
               if(response.code == 400){
-                vm.error = !response.success;
                 vm.message = response.message;
                 return;
               }
@@ -232,8 +234,10 @@
             });
           }else{
             UserService.Update(vm.data).then(function(response){
+              vm.error = response.code == 400;
+              vm.success = response.code != 400;
+
               if(response.code == 400){
-                vm.error = !response.success;
                 vm.message = response.message;
                 return;
               }

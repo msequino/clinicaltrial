@@ -21,35 +21,35 @@
         return service;
 
         function GetAll() {
-            return $http.get('/goirc/study').then(handleSuccess, handleError('Error getting all study'));
+            return $http.get('/clinicaltrial/study').then(handleSuccess, handleError('Error getting all study'));
         }
 
         function GetCategories() {
-            return $http.get('/goirc/category').then(handleSuccess, handleError('Error getting all study'));
+            return $http.get('/clinicaltrial/category').then(handleSuccess, handleError('Error getting all study'));
         }
 
         function GetTreeViewCategories() {
-            return $http.get('/goirc/category/treeview').then(handleSuccess, handleError('Error getting all study'));
+            return $http.get('/clinicaltrial/category/treeview').then(handleSuccess, handleError('Error getting all study'));
         }
 
         function GetById(id) {
-            return $http.get('/goirc/study/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/clinicaltrial/study/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetStats() {
-            return $http.get('/goirc/study/stats').then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/clinicaltrial/study/stats').then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByPatient(id) {
-            return $http.get('/goirc/study/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/clinicaltrial/study/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function Create(study) {
-            return $http.post('/goirc/study', study).then(handleSuccess, handleError);
+            return $http.post('/clinicaltrial/study', study).then(handleSuccess, handleError);
         }
 
         function Update(study) {
-            return $http.put('/goirc/study/' + study._id, study).then(handleSuccess, handleError);
+            return $http.put('/clinicaltrial/study/' + study._id, study).then(handleSuccess, handleError);
         }
 
         // private functions

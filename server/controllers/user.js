@@ -17,9 +17,9 @@ module.exports.getAll = function(req,res,next){
 module.exports.get = function(req,res,next){
   db.User.findById(req.params.id,{password : false},function(err,user){
     if(err)
-      res.json({code : 400,message : "Something wrong"});
+      return res.status(400).json({code : 400,message : "Something wrong"});
 
-      res.json({code : 200,data : user});
+    return res.json({code : 200,data : user});
   });
 }
 
@@ -41,10 +41,12 @@ module.exports.create = function(req,res,next){
       user['password'] = token;
       if(!err){
         sendEmailToUser(data,0);
+        log.log('info','CREATE USER '+ user.email + ' SUCCESS');
         res.json({code : 200,data : data});
-      }else
-        res.json({code : 400,message : "The user has not been inserted"})
-
+      }else{
+        log.log('error','CREATE USER '+ user.email + ' error mongo type ' + err.code);
+        res.status(400).json({code : 400,message : "User already exists"});
+      }
     });
 
   });
@@ -58,10 +60,11 @@ module.exports.save = function(req,res,next){
 
   db.User.update({_id:req.params.id},newUser.toObject(), function(err, numAffected){
     if(!err){
+      log.log('info','UPDATE USER '+ newUser.email + ' SUCCESS');
       res.json({code : 200});
     }else
-      res.json({code : 400,message : "The user has not been inserted"})
-
+      log.log('error','UPDATE USER '+ newUser.email + ' error mongo type ' + err.code);
+      res.status(400).json({code : 400,message : "User already exists"});
   });
 }
 
@@ -75,10 +78,12 @@ module.exports.resetPassword = function(req,res,next){
         if(!err){
           data.password = token;
           sendEmailToUser(data,1);
+          log.log('info','RESET PASSWORD '+ user.email + ' SUCCESS');
           res.json({code : 200});
-        }else
-          res.json({code : 400,message : "The user has not been inserted"})
-
+        }else{
+          log.log('error','RESET PASSWORD '+ user.email + ' error mongo type ' + err.code);
+          res.status(400).json({code : 400,message : "User already exists"});
+        }
       });
     });
 
@@ -122,9 +127,10 @@ function sendEmailToUser(user,isReset){
   // send mail with defined transport object
   transport.sendMail(mailOptions, function(error, info){
       if(error){
-          return console.log(error);
+        log.log('error','SEND EMAIL '+ user.email + ' ERROR' + error);
+        return;
       }
-      console.log('Message sent');
+      log.log('info','SEND EMAIL '+ user.email + ' SUCCESS');
 
   });
 }
