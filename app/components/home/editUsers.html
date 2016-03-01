@@ -30,6 +30,19 @@
               <span ng-show="vm.form.lastName.$dirty && vm.form.lastName.$error.required" class="help-block">Cognome richiesto</span>
           </div>
         </div>
+
+        <div class="form-group">
+            <label for="members">Azienda di riferimento</label>
+            <angucomplete id="members"
+              placeholder="Cerca clinica a cui associare professionista"
+              pause="400"
+              selectedobject="vm.clinicsObject"
+              url="clinic/find?s="
+              datafield="data"
+              titlefield="city,name"
+              inputclass="form-control form-group col-md-6"/>
+        </div>
+
         <div class="form-group">
             <label for="phone">Telefono</label>
             <input type="text" name="phone" class="form-control" ng-model="vm.data.phone" />
@@ -54,14 +67,6 @@
             <span ng-show="vm.form.clinic.$dirty && vm.form.clinic.$error.required" class="help-block">Clinica richiesta</span>
           </div>-->
         </div>
-        <angucomplete id="members"
-          placeholder="Cerca clinica a cui associare professionista"
-          pause="400"
-          selectedobject="vm.clinicsObject"
-          url="clinic/find?s="
-          datafield="data"
-          titlefield="city,name"
-          inputclass="form-control form-group col-md-6"/>
 
         <div class="row" ng-show="vm.data._id">
           <div class="form-group col-md-6">

@@ -114,7 +114,9 @@
         function loadUser(id) {
             UserService.GetById(id)
                 .then(function (message) {
-                    vm.data = message.data;
+                  var el = document.getElementById("members_value");
+                  angular.element(el).val(message.data.clinic);
+                  vm.data = message.data;
                 });
         }
 
@@ -214,9 +216,17 @@
 
         function submitUser(changePage){
 
+          vm.data.clinic = vm.clinicsObject ? vm.clinicsObject.originalObject._id : undefined;
+          if(vm.data.clinic === undefined)
+          {
+            vm.error = true;
+            vm.success = false;
+
+            vm.message = "ATTENZIONE - inserire una clinica valida";
+          }
+          return;
           if(!vm.data._id){
 
-            vm.data.clinic = vm.clinicsObject.originalObject._id;
             vm.data.active = (vm.data.active ? true : false);
             vm.data.group = 3;
             UserService.Create(vm.data).then(function(response){

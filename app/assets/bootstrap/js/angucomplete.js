@@ -144,7 +144,7 @@ angular.module('angucomplete', [] )
 
             $scope.hideResults = function() {
                 $scope.hideTimer = $timeout(function() {
-                    $scope.showDropdown = false;
+                    $scope.showDropdown = false;                      
                 }, $scope.pause);
             };
 

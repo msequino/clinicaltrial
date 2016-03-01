@@ -16,10 +16,22 @@ module.exports.getAll = function(req,res,next){
 
 module.exports.get = function(req,res,next){
   db.User.findById(req.params.id,{password : false},function(err,user){
-    if(err)
-      return res.status(400).json({code : 400,message : "Something wrong"});
+    if(user.clinic)
+      db.Clinic.findById(user.clinic,function(err,data){
+        if(data.city && data.name)
+          user.clinic = data.city + " " + data.name;
+        if(err)
+          return res.status(400).json({code : 400,message : "Something wrong"});
 
-    return res.json({code : 200,data : user});
+        return res.json({code : 200,data : user});
+      });
+    else{
+      if(err)
+        return res.status(400).json({code : 400,message : "Something wrong"});
+
+      return res.json({code : 200,data : user});
+      
+    }
   });
 }
 
